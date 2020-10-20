@@ -35,11 +35,29 @@ const MORSE_TABLE = {
     '---..':  '8',
     '----.':  '9',
     '-----':  '0',
+    '**********': ' '
 };
 
-function decode(expr) {
-    // write your solution here
+function decode(expr) {     
+    const valueTable = {
+        0: '',
+        10: '.', 
+        11: '-'        
+    }
+    
+
+    let arr = expr.match(/.{1,10}/g)    // получаем массив из подмассивов с 10 символами
+    
+    let result = []
+    for (let item of arr) {
+        result += MORSE_TABLE[item.replace(/0|10|11/g, (item) => valueTable[item])]
+    }
+    return result
 }
+
+
+
+
 
 module.exports = {
     decode
